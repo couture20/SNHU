@@ -18,9 +18,11 @@ In my personal life I have found in interest in blockchaining, in particular wit
 [Cthulhu Has Risin NFT](https://cthulhuhasrisin.com/)
 
 
+
+
 ### VBA code for report generating
 
-Below is a brief example snippet of VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creatin gthis report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. For purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
+Below is a brief example snippet of VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creatin gthis report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. I wanted to include this bit of code because it showcases my ability to design and engineer a program that interacts with a database through a program language (VBA) that is utilized through the widely used Microsoft 365 suite. For the purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
 
         Public Sub GssData()
 
@@ -118,14 +120,118 @@ Below is a brief example snippet of VBA code that I created that interacts with 
         sh2.Range("G2").PasteSpecial xlPasteValues
         Application.CutCopyMode = False
 
-       Exit Sub
+        Exit Sub
 
-    'Error Handler for if the user enters the wrong username or password
-    Broke:
-        MsgBox "Invalid Username or Password"
+        'Error Handler for if the user enters the wrong username or password
+        Broke:
+                MsgBox "Invalid Username or Password"
 
-    End Sub
+        End Sub
 
+
+
+
+### Simple Password Protect
+
+Below is another brief example snippet of a C++ code that I made for a College class in my Computer Science degree program. In it, I made a very simple yet effective while loop that asks the user to input the password before they are able to use the application. The user will have 3 attempts before the program will end. The snippet is part of a larger program that allows the user to interact with product bids. I included this bit of code because showcases the applications use of a variety of alorithms and data structures by utilizing nodes, nested loops, read/writes to a .csv and user interactions.
+
+    cout << "===== Welcome! Please enter the Password! =====" << endl;
+    cout << "===== You only get 3 Attempts! =====" << endl;
+
+    //A while statment to allow the user 3 attempts for the password
+    While (attCount < 3 ){
+        cout << "Password: " << endl;
+        cin >> pwd;
+
+        //Sets the password and is an if statment to allow the user to input password
+        if (pwd !="12345"){
+            cout << "Incorrect Password, Please Try Again!" << endl;
+            attCount++;
+        }
+        else{
+
+            cout << "Correct Password!" << endl;
+            system("cls")
+        }
+    }
+    //If the password is true then it will continue to the while loop
+    If (pwd == "12345"){
+        cout << "Welcome! Please select your choice." << endl;
+        int choice = 0;
+
+        //The while loop present the user with options
+        while (choice != 9) {
+            cout << "Menu:" << endl;
+            cout << "  1. Load Bids" << endl;
+            cout << "  2. Display All Bids" << endl;
+            cout << "  3. Find Bid" << endl;
+            cout << "  4. Remove Bid" << endl;
+            cout << "  9. Exit" << endl;
+            cout << "Enter choice: ";
+            cin >> choice;
+
+            //Switch statment to run through the user options
+            switch (choice) {
+
+            case 1:
+                bst = new BinarySearchTree();
+
+                // Initialize a timer variable before loading bids
+                ticks = clock();
+
+                // Complete the method call to load the bids
+                loadBids(csvPath, bst);
+
+                //cout << bst->Size() << " bids read" << endl;
+
+                // Calculate elapsed time and display result
+                ticks = clock() - ticks; // current clock ticks minus starting clock ticks
+                cout << "time: " << ticks << " clock ticks" << endl;
+                cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+                break;
+
+            //Puts bids in order
+            case 2:
+                bst->InOrder();
+                break;
+
+            //Finds the bids
+            case 3:
+                ticks = clock();
+
+                bid = bst->Search(bidKey);
+
+                ticks = clock() - ticks; // current clock ticks minus starting clock ticks
+
+                if (!bid.bidId.empty()) {
+                    displayBid(bid);
+                } else {
+                    cout << "Bid Id " << bidKey << " not found." << endl;
+                }
+
+                cout << "time: " << ticks << " clock ticks" << endl;
+                cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+                break;
+
+            //Removes the bid
+            case 4:
+                bst->Remove(bidKey);
+                break;
+            }
+        }
+    }
+
+    //Exits the program if too many attempts were made
+    else{
+        system("cls");
+        cout << "You have reached you 3 attempts. The program will exit now" << endl;
+    }
+    cout << "Good bye." << endl;
+
+	return 0;
+        
+        
 ```markdown
 Syntax highlighted code block
 
