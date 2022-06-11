@@ -13,7 +13,7 @@ Currently I work at Ups as the Central Zone I.E. Service Engineer. My current du
 - I train and develop operations managment teams and other company employees on how to effectively use newly implememted systems.
 - Ovrall my role is to monitor and enhance the zones logisitc capabilities and to ensure a more profitable and quick return on investments. 
 
-In my personal life I have found in interest in blockchaining, in particular with NFTs. I have made several basic websites that utilize personalized code to allow the website's visitors to mint NFTs that I created and send it to their digital wallet. I have written code that will generate thousands of various NFTs based on the users layer inputs, and will attach the metadata to each NFT. Below is a link to a NFT minting app that I created, along with the artwork that was generated through the art generating program.
+In my personal life I have found in interest in blockchaining, in particular with NFTs. I have made several basic websites that utilize personalized code to allow the website's visitors to mint NFTs that I created and send it to their digital wallet. I have written code that will generate thousands of various NFTs based on the users layer inputs, and will attach the metadata to each NFT. Below is a link to a NFT minting app that I created, along with the artwork that was generated through the art generating program. For security purposes of the website and the minting app, I wont be showcasing the code used. However, if requested by a future potential employer I can provide some snippets of the code. 
 
 [Cthulhu Has Risin NFT](https://cthulhuhasrisin.com/)
 
@@ -22,7 +22,11 @@ In my personal life I have found in interest in blockchaining, in particular wit
 
 ### VBA code for report generating
 
-Below is a brief example snippet of VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creatin gthis report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. I wanted to include this bit of code because it showcases my ability to design and engineer a program that interacts with a database through a program language (VBA) that is utilized through the widely used Microsoft 365 suite. For the purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
+Below is a brief example snippet of VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. The overall program is based in Excel and upon opening the file the user is greeted by a userform in which they input the desired variables for the SQL pass through query. At the bottom of the userform, it includes section that requires the user to input their user ID and password in order to use the program. The VBA code is also password protected and is only accessable by me. I added this bit of security to help ensure that the data is only being accessed by authorized personal. 
+
+I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creating this report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. I wanted to include this bit of code because it showcases my ability to design and engineer a program that interacts with a database through a program language (VBA) that is utilized through the widely used Microsoft 365 suite. 
+
+For the purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
 
         Public Sub GssData()
 
@@ -133,7 +137,11 @@ Below is a brief example snippet of VBA code that I created that interacts with 
 
 ### Simple Password Protect
 
-Below is another brief example snippet of a C++ code that I made for a College class in my Computer Science degree program. In it, I made a very simple yet effective while loop that asks the user to input the password before they are able to use the application. The user will have 3 attempts before the program will end. The snippet is part of a larger program that allows the user to interact with product bids. I included this bit of code because showcases the applications use of a variety of alorithms and data structures by utilizing nodes, nested loops, read/writes to a .csv and user interactions.
+Below is another brief example snippet of a C++ code that I made for a College class in my Computer Science degree program. In it, I made a very simple yet effective while loop that asks the user to input the password before they are able to use the application. The user will have 3 attempts before the program will end. The snippet is part of a larger program that allows the user to interact with product bids. The program runs through a list of otions that is displayed to the user, the user selects an options and the program excutes the desired option. For example, if the user wanted to find a certain bid, they would make the selection, then enter the bid number, the program will search in the .csv file and output the desired bid. 
+
+I wanted to include this bit of code because showcases the applications use of a variety of alorithms and data structures by utilizing nodes, nested loops, read/writes to a .csv and user interactions. I also wanted to include it because it shows on a simple level how I understand the importance of data security and how I can implement security measures to protect propritary information.
+
+
 
     cout << "===== Welcome! Please enter the Password! =====" << endl;
     cout << "===== You only get 3 Attempts! =====" << endl;
@@ -232,30 +240,7 @@ Below is another brief example snippet of a C++ code that I made for a College c
 	return 0;
         
         
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+### Summary
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/couture20/SNHU/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+It is my hope that everything outlined above showcases my abilities as a programmer. A programmer that can learn, adapt, design and implement a variety of programs in a diverse catelog of program languages.
