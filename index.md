@@ -23,6 +23,7 @@ In my personal life I have found in interest in blockchaining, in particular wit
 Below is a brief example snippet of VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creatin gthis report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. For purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
 
 '''markdown
+
         Public Sub GssData()
 
         'First set of variables define and interact with the SQL Database
