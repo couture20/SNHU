@@ -28,6 +28,8 @@ I created it roughly a year ago with the purpose of minimizing labor intesive da
 
 For the purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
 
+Below is a short Code Review on YouTube that I made for the code mentioned above and shown below.
+
 <p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RV4yiUJ6Uu4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
