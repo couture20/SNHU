@@ -24,7 +24,8 @@ In my personal life I have found in interest in blockchaining, in particular wit
 
 This is a segment of a VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. The overall program is based in Excel and upon opening the file the user is greeted by a userform in which they input the desired variables for the SQL pass through query. At the bottom of the userform, it includes section that requires the user to input their user ID and password in order to use the program. The VBA code is also password protected and is only accessable by me. I added this bit of security to help ensure that the data is only being accessed by authorized personal. 
 
-I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creating this report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. I wanted to include this bit of code because it showcases my ability to design and engineer a program that interacts with a database through a program language (VBA) that is utilized through the widely used Microsoft 365 suite. 
+I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creating this report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. I wanted to include this bit of code because it showcases my ability to design and engineer a program that interacts with a database through a program language (VBA) that is utilized through the widely used Microsoft 365 suite. This bit of code showcases my ability to design/engineer software, to create alogrithms and data structures that interact with databases.
+
 
 For the purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
 
@@ -36,6 +37,7 @@ Below is a short post enhancement Code Review on YouTube that I made for the cod
       
      
 Below you'll see two versions of the smae code. One is a version that was pre-enhancements and the second is post enhancements. The enhancements were adding in additional comments for the code and to remove some redundent pieces of code. For example I had two "while" loops one nested within the other. I removed one of the nested loops because it was redundent and hindered the procssing speed of the program. I orginally had the two "while" loops for the first iteration of the code, however I later changed some of the parameters, but left the extra "while" loop. Recently, after reviewing the code, I noticed the redundacy, removed it, tested the code and it worked as it should. 
+
 The reason I wanted to add in addtional comments into the code, was to help fellow co-workers who might need to go in and adjust a few variables. It's benifical to have detailed comments so that it can minimize time wasted trying to figure out what each line is for.
 
 
@@ -119,11 +121,7 @@ Pre-Enhancements
     sh2.Range("G2").PasteSpecial xlPasteValues
     Application.CutCopyMode = False
 
-   
-
 	Exit Sub
-
-
 
 	Broke:
 
