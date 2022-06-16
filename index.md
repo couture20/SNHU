@@ -22,18 +22,120 @@ In my personal life I have found in interest in blockchaining, in particular wit
 
 ### VBA code for report generating
 
-Below is a brief example snippet of VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. The overall program is based in Excel and upon opening the file the user is greeted by a userform in which they input the desired variables for the SQL pass through query. At the bottom of the userform, it includes section that requires the user to input their user ID and password in order to use the program. The VBA code is also password protected and is only accessable by me. I added this bit of security to help ensure that the data is only being accessed by authorized personal. 
+This is a segment of a VBA code that I created that interacts with the comapnies SQL Database. The purpose of it, was to parse and format a users data input for a SQL pass through query and then output the data in a user friendly readable table. The overall program is based in Excel and upon opening the file the user is greeted by a userform in which they input the desired variables for the SQL pass through query. At the bottom of the userform, it includes section that requires the user to input their user ID and password in order to use the program. The VBA code is also password protected and is only accessable by me. I added this bit of security to help ensure that the data is only being accessed by authorized personal. 
 
 I created it roughly a year ago with the purpose of minimizing labor intesive data collection through ineffcient company web applications. After creating this report I was able to reduce several hours of dataminning and report generating, down to just a few minutes. I wanted to include this bit of code because it showcases my ability to design and engineer a program that interacts with a database through a program language (VBA) that is utilized through the widely used Microsoft 365 suite. 
 
 For the purposes of company proprietary information, pieces of the code have been either altered or removed in order to protect comapny data.
 
-Below is a short Code Review on YouTube that I made for the code mentioned above and shown below.
+Below is a short post enhancement Code Review on YouTube that I made for the code mentioned above and shown below.
 
 <p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RV4yiUJ6Uu4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </p>
-        Public Sub GssData()
+      
+     
+Below you'll see two versions of the smae code. One is a version that was pre-enhancements and the second is post enhancements. The enhancements were adding in additional comments for the code and to remove some redundent pieces of code. For example I had two "while" loops one nested within the other. I removed one of the nested loops because it was redundent and hindered the procssing speed of the program. I orginally had the two "while" loops for the first iteration of the code, however I later changed some of the parameters, but left the extra "while" loop. Recently, after reviewing the code, I noticed the redundacy, removed it, tested the code and it worked as it should. 
+The reason I wanted to add in addtional comments into the code, was to help fellow co-workers who might need to go in and adjust a few variables. It's benifical to have detailed comments so that it can minimize time wasted trying to figure out what each line is for.
+
+
+Pre-Enhancements
+
+    Public Sub GssData()
+
+    Dim CoNStr As String, StrSQL As String
+    Dim ConSvr As ADODB.Connection
+    Dim RSSVR As ADODB.Recordset
+    Dim comd As New ADODB.Command
+    Dim DOW2 As Range
+    Dim sh1, sh2 As Worksheet
+    Dim lastCol, lastRow, num As Long
+    Dim foundCol, I, x As Long
+    Dim trk As Range
+    Dim origin, sort As String
+
+    Set ConSvr = New ADODB.Connection
+
+    Set RSSVR = New ADODB.Recordset
+
+    Set sh1 = ThisWorkbook.Sheets("String")
+    Set sh2 = ThisWorkbook.Sheets("GSS")
+    lastRow = sh2.Cells(Rows.Count, 1).End(xlUp).Row
+
+    sh2.Range("A2:H" & lastRow).Clear
+
+    With sh1
+        lastCol = .Cells(1, .Columns.Count).End(xlToLeft).Column
+    End With
+
+    origin = sh1.Range("A3")
+    sort = sh1.Range("A4")
+
+    num = lastCol - 3
+
+    'foundCol = lastCol.Column
+    comd.CommandTimeout = 0
+    ConSvr.CommandTimeout = 120
+    On Error GoTo Broke
+    CoNStr = "DSN=GSS_Arch;UID=DataArchive;PWD=readonly;DATABASE=GSSDataArchive;"
+    ConSvr.Open CoNStr
+
+    I = 0
+    x = 1
+
+    Do While I <= num
+         Do While x <= num
+            Set trkFind = sh1.Range(Cells(x, lastCol), Cells(x, lastCol))
+            StrSQL = "SELECT PKG_TCK_NR, SRT_DT, SRT_TYP_CD, ORG_OGZ_NR, DTN_OGZ_NR,DTN_SRT_TYP_CD,BLT_NR,BAY_NR " & vbCrLf & _
+                    "FROM dbo.VSCN_PSL " & vbCrLf & _
+                    "WHERE PKG_TCK_NR IN ('" & trkFind & " 'null') AND ORG_OGZ_NR='" & origin & "' AND SRT_TYP_CD ='0" & sort & "'"
+
+            RSSVR.Open StrSQL, ConSvr
+            sh2.Range("A1:A" & lastRow).CopyFromRecordset RSSVR
+            RSSVR.Close
+            x = x + 1
+        Loop
+        I = I + 1
+     Loop
+
+    Set RSSVR = Nothing
+    Set ConSvr = Nothing
+
+    'sh2.Range("A1").EntireRow.Insert
+    sh2.Range("A1") = "Tracking"
+    sh2.Range("B1") = "Date"
+    sh2.Range("C1") = "Origin Sort"
+    sh2.Range("D1") = "Origin"
+    sh2.Range("E1") = "Dest"
+    sh2.Range("F1") = "Dest Sort"
+    sh2.Range("G1") = "Area"
+    sh2.Range("H1") = "Bay"
+
+    lastRow = sh2.Cells(Rows.Count, 1).End(xlUp).Row
+    sh2.Columns(9).EntireColumn.Clear
+    sh2.Range("I2").Formula = "=If(left(G2,2)=""PD"",left(G2,2)&right(G2,2),G2)"
+    sh2.Range("I2").AutoFill Destination:=sh2.Range("I2:I" & lastRow)
+    sh2.Range("I2:I" & lastRow).Copy
+    sh2.Range("G2").PasteSpecial xlPasteValues
+    Application.CutCopyMode = False
+
+   
+
+	Exit Sub
+
+
+
+	Broke:
+
+	    MsgBox "Bad Password or Invalid ID"
+
+	End Sub
+	
+	
+
+Post Enhancements
+
+      Public Sub GssData()
 
         'First set of variables define and interact with the SQL Database
         Dim CoNStr, StrSQL As String
@@ -142,11 +244,103 @@ Below is a short Code Review on YouTube that I made for the code mentioned above
 
 ### Simple Password Protect
 
-Below is another brief example snippet of a C++ code that I made for a College class in my Computer Science degree program. In it, I made a very simple yet effective while loop that asks the user to input the password before they are able to use the application. The user will have 3 attempts before the program will end. The snippet is part of a larger program that allows the user to interact with product bids. The program runs through a list of otions that is displayed to the user, the user selects an options and the program excutes the desired option. For example, if the user wanted to find a certain bid, they would make the selection, then enter the bid number, the program will search in the .csv file and output the desired bid. 
+This is another brief example of my programming skills. This is a snippet of C++ code that I made for a College class in my Computer Science degree program. In it, I made a very simple yet effective while loop that asks the user to input the password before they are able to use the application. The user will have 3 attempts before the program will end. The snippet is part of a larger program that allows the user to interact with product bids. The program runs through a list of otions that is displayed to the user, the user selects an options and the program excutes the desired option. For example, if the user wanted to find a certain bid, they would make the selection, then enter the bid number, the program will search in the .csv file and output the desired bid. 
 
 I wanted to include this bit of code because showcases the applications use of a variety of alorithms and data structures by utilizing nodes, nested loops, read/writes to a .csv and user interactions. I also wanted to include it because it shows on a simple level how I understand the importance of data security and how I can implement security measures to protect propritary information.
 
+Below are two versions of the same bit of code. The enhancements that I added were extra code comments and a password prompt. I wanted to add the extra bit of comments for the same reasons that I added them into the code example above; to help facilitate efficiency for the next programmer that wants to utilize this bit of code. The other enhancement was a password prompt which asks the user for the password in order to interact with the program. The user will have 3 opportunities to input the correct password, otherwise it will exit the program.  
 
+
+Pre-Enhancements
+
+	int main(int argc, char* argv[]) {
+
+	    // process command line arguments
+	    string csvPath, bidKey;
+	    switch (argc) {
+	    case 2:
+		csvPath = argv[1];
+		bidKey = "98109";
+		break;
+	    case 3:
+		csvPath = argv[1];
+		bidKey = argv[2];
+		break;
+	    default:
+		csvPath = "eBid_Monthly_Sales_Dec_2016.csv";
+		bidKey = "98109";
+	    }
+
+	    // Define a timer variable
+	    clock_t ticks;
+
+	    // Define a binary search tree to hold all bids
+	    BinarySearchTree* bst;
+
+	    Bid bid;
+
+	    int choice = 0;
+	    while (choice != 9) {
+		cout << "Menu:" << endl;
+		cout << "  1. Load Bids" << endl;
+		cout << "  2. Display All Bids" << endl;
+		cout << "  3. Find Bid" << endl;
+		cout << "  4. Remove Bid" << endl;
+		cout << "  9. Exit" << endl;
+		cout << "Enter choice: ";
+		cin >> choice;
+
+		switch (choice) {
+
+		case 1:
+		    bst = new BinarySearchTree();
+
+		    // Initialize a timer variable before loading bids
+		    ticks = clock();
+
+		    // Complete the method call to load the bids
+		    loadBids(csvPath, bst);
+
+		    //cout << bst->Size() << " bids read" << endl;
+
+		    // Calculate elapsed time and display result
+		    ticks = clock() - ticks; // current clock ticks minus starting clock ticks
+		    cout << "time: " << ticks << " clock ticks" << endl;
+		    cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+		    break;
+
+		case 2:
+		    bst->InOrder();
+		    break;
+
+		case 3:
+		    ticks = clock();
+
+		    bid = bst->Search(bidKey);
+
+		    ticks = clock() - ticks; // current clock ticks minus starting clock ticks
+
+		    if (!bid.bidId.empty()) {
+			displayBid(bid);
+		    } else {
+			cout << "Bid Id " << bidKey << " not found." << endl;
+		    }
+
+		    cout << "time: " << ticks << " clock ticks" << endl;
+		    cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+		    break;
+
+		case 4:
+		    bst->Remove(bidKey);
+		    break;
+		}
+	    }
+	    cout << "Good bye." << endl;
+		return 0;
+	}
+
+
+Post Enhancements
 
     cout << "===== Welcome! Please enter the Password! =====" << endl;
     cout << "===== You only get 3 Attempts! =====" << endl;
